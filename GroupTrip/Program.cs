@@ -12,7 +12,13 @@
 
 const double TAX_RATE = 0.18;
 
-const int PIZZA_SLICES = 6;
+const double PIZZA_SLICES = 8.0;
+
+//Arrays
+
+string[] names = { "Ada", "Grace", "Alan", "Katherine" };
+double[] hoursWorked = { 22, 15, 30, 18 };
+double[] hourlyRates = { 13.50, 16.00, 11.20, 14.80 };
 
 //Part 1: The Trip
 
@@ -39,36 +45,35 @@ double fuelCost = FuelCost(tripMileage, gasMileage, gasPrice);
 
 System.Console.WriteLine("Fuel Cost: " + $"{fuelCost:C}");
 
-int numberSlices = numberPizzas * PIZZA_SLICES;
-double slicesPerPerson = numberSlices / 4;
-int leftoverSlices = numberSlices % 4;
+double numberSlices = numberPizzas * PIZZA_SLICES;
+double slicesPerPerson = numberSlices / names.Length;
 double pizzaCost = numberPizzas * pizzaPrice;
+
+double tripCost = fuelCost + pizzaCost;
+double individualCost = (fuelCost + pizzaCost) / names.Length;
 
 System.Console.WriteLine("Pizza cost: " + $"{pizzaCost:C}");
 
-System.Console.WriteLine("Trip total: " + $"{(fuelCost + pizzaCost):C}");
+System.Console.WriteLine("Trip total: " + $"{tripCost:C}");
+
+//Part 2: The Group
+
+System.Console.WriteLine("\n  ===== Part 2: The Group =====");
+
+System.Console.WriteLine("People going: " + names.Length.ToString());
+System.Console.WriteLine("Slices each: " + slicesPerPerson.ToString());
+System.Console.WriteLine("Cost per person: " + (individualCost).ToString("C"));
 
 /*
-//Part 3: Paycheck
-
-System.Console.WriteLine("\n  ============ Part 3: Paycheck ============");
-
-System.Console.WriteLine("\n  ===== RESULTS =====");
-
-System.Console.WriteLine("Your weekly gross pay: " + grossPay.ToString("C"));
-System.Console.WriteLine("Taxes withheld weekly: " + taxWithheld.ToString("C"));
-System.Console.WriteLine("Your weekly net pay: " + netPay.ToString("C"));
-
-double individualCost = (fuelCost + pizzaCost) / names.Length;
-
 System.Console.WriteLine("\n  === FINAL RESULTS ===");
 System.Console.WriteLine("Total trip cost: " + tripTotalCost.ToString("C"));
 System.Console.WriteLine("Trip cost per person: " + tripIndividualCost.ToString("C"));
 System.Console.WriteLine("Your hourly net pay: " + netHourlyPay.ToString("C"));
 System.Console.WriteLine("Time you must work this week to cover your share (hh:mm): " + hoursNeededFormatted.ToString(@"hh\:mm"));
+*/
 
 //Methods
-*/
+
 static double FuelCost(double tripMileage, double gasMileage, double gasPrice)
 {
     double gallons = tripMileage / gasMileage;
