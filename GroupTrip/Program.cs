@@ -40,7 +40,7 @@ int numberPizzas = Convert.ToInt32(Console.ReadLine());
 Console.Write("Enter the price per pizza (no nondecimal values): ");
 double pizzaPrice = Convert.ToDouble(Console.ReadLine());
 
-System.Console.WriteLine("\n===== Part 1: The Trip =====");
+System.Console.WriteLine("\n ===== Part 1: The Trip =====");
 
 double fuelCost = FuelCost(tripMileage, gasMileage, gasPrice);
 
