@@ -4,7 +4,8 @@
  * Course: CSCI 1250, Section 002
  * Assignment: Lab 02, Trip Calculator
  * Date: September 22, 2026
- * Description: Calculates the fuel, food, and work hours behind one road trip.
+ * Description: Rebuilds the trip calculator with methods and arrays so it
+ *              reports on a whole group instead of one person.
  ==============================================================================
  */
 
@@ -64,13 +65,28 @@ System.Console.WriteLine("People going: " + names.Length.ToString());
 System.Console.WriteLine("Slices each: " + slicesPerPerson.ToString());
 System.Console.WriteLine("Cost per person: " + (individualCost).ToString("C"));
 
-/*
-System.Console.WriteLine("\n  === FINAL RESULTS ===");
-System.Console.WriteLine("Total trip cost: " + tripTotalCost.ToString("C"));
-System.Console.WriteLine("Trip cost per person: " + tripIndividualCost.ToString("C"));
-System.Console.WriteLine("Your hourly net pay: " + netHourlyPay.ToString("C"));
-System.Console.WriteLine("Time you must work this week to cover your share (hh:mm): " + hoursNeededFormatted.ToString(@"hh\:mm"));
-*/
+//Part 3: The Report
+
+double totalHours = 0;
+double totalNetPay = 0;
+double longestHoursToWork = 0;
+
+System.Console.WriteLine("\n ===== Part 3: Who Works How Long =====");
+
+for (int i = 0; i < names.Length; i++)
+{
+    double netPay = TakeHomePay(hoursWorked[i], hourlyRates[i], TAX_RATE);
+    double netHourlyRate = netPay / hoursWorked[i];
+    double hoursToWork = HoursToCover(individualCost, netHourlyRate);
+    hoursToWork = Math.Round(hoursToWork, 2);
+    Console.WriteLine($"{names[i]} takes home {netPay:C} for {hoursWorked[i]} hours of work, makes {netHourlyRate:C} hourly, and must work {hoursToWork} hours to cover their share.");
+    totalHours += hoursWorked[i];
+    totalNetPay += netPay;
+    longestHoursToWork = Math.Max(longestHoursToWork, hoursToWork);
+}
+System.Console.WriteLine($"\nTotal hours worked: {totalHours}");
+System.Console.WriteLine($"Total take home pay: {totalNetPay:C}");
+System.Console.WriteLine($"Longest anyone must work: {longestHoursToWork}");
 
 //Methods
 
@@ -80,9 +96,9 @@ static double FuelCost(double tripMileage, double gasMileage, double gasPrice)
     return gallons * gasPrice;
 }
 
-static double TakeHomePay(double hours, double hourlyRate, double taxRate)
+static double TakeHomePay(double hoursWorked, double hourlyRate, double taxRate)
 {
-    double grossPay = hours * hourlyRate;
+    double grossPay = hoursWorked * hourlyRate;
     double taxWithheld = grossPay * TAX_RATE;
     return grossPay - taxWithheld;
 }
