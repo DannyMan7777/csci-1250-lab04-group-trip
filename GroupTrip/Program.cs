@@ -109,11 +109,6 @@ static double HoursToCover(double individualCost, double netHourlyRate)
 }
 
 /*
-Alternatively, to make HoursToCover look nicer:
-static TimeSpan HoursToCover(double individualCost, double netHourlyRate)
-{
-    double unformattedHoursToCover = individualCost / netHourlyRate;
-    TimeSpan hoursToCover = TimeSpan.FromHours(unformattedHoursToCover);
-    return hoursToCover;
-}
+This is where I would show you how I would declare a TimeSpan for hoursToWork, what modifications I would make to which lines,
+and how much nicer and more practical the result would be. However, it's late and I'm lazy. Hate to disappoint. Next time.
 */
